@@ -1,0 +1,44 @@
+generated: '2026-07-21'
+method: searched
+description: >-
+  Results of probing the /.well-known/ discovery surface for the USPL Wrogn
+  storefront. https://www.usplworld.com/ 301-redirects to https://wrogn.com/,
+  a Shopify-hosted store (wrogn-website.myshopify.com), so wrogn.com is the
+  probed host. Status is the HTTP code observed at fetch time; every 200 that
+  returned a real, correctly-typed document was saved verbatim alongside this
+  index. The OIDC / OAuth discovery documents are Shopify Customer Accounts
+  (issuer https://shopify.com/authentication/81803051309) published on the
+  store's own host; the UCP document is the store's Universal Commerce
+  Protocol merchant profile.
+hosts:
+  - host: https://wrogn.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 200
+        type: application/json
+        file: uspl-wrogn-openid-configuration.json
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        type: application/json
+        file: uspl-wrogn-oauth-authorization-server.json
+      - path: /.well-known/ucp
+        status: 200
+        type: application/json
+        file: uspl-wrogn-ucp.json
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /llms.txt
+        status: 200
+        type: text/plain
+        file: ../llms/uspl-wrogn-llms.txt
+      - path: /agents.md
+        status: 200
+        type: text/markdown
+        file: ../skills/uspl-wrogn-agents.md
+  - host: https://www.usplworld.com
+    redirects_to: https://wrogn.com/
+    documents: []

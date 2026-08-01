@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: searched
+source: https://wrogn.com/.well-known/openid-configuration
+description: >-
+  Authentication profile for the Wrogn (USPL / Universal Sportsbiz) Shopify
+  storefront, captured from live discovery documents on wrogn.com. There is
+  no separate developer program: the machine surface is the Shopify-native
+  storefront (product JSON, storefront MCP, UCP), with customer identity via
+  Shopify Customer Accounts OIDC published on the store's own host.
+schemes:
+  - name: customer-accounts-oidc
+    type: openIdConnect
+    openIdConnectUrl: https://wrogn.com/.well-known/openid-configuration
+    issuer: https://shopify.com/authentication/81803051309
+    authorization_endpoint: https://shopify.com/authentication/81803051309/oauth/authorize
+    token_endpoint: https://shopify.com/authentication/81803051309/oauth/token
+    jwks_uri: https://shopify.com/authentication/81803051309/.well-known/jwks.json
+    response_types: [code]
+    pkce: S256
+    grant_types:
+      - authorization_code
+      - refresh_token
+      - urn:ietf:params:oauth:grant-type:jwt-bearer
+    token_endpoint_auth_methods: [client_secret_basic]
+    id_token_signing_alg: RS256
+    scopes: scopes/uspl-wrogn-scopes.yml
+  - name: anonymous-storefront
+    type: none
+    description: >-
+      Read-only storefront browsing and the storefront MCP catalog/cart tools
+      require no authentication: GET /products/{handle}.json,
+      GET /collections/{handle}/products.json, GET /search?q=, and
+      POST /api/mcp (tools/list answered unauthenticated at probe time,
+      2026-07-21). Rate-limited per IP.
+  - name: ucp-agent-profile
+    type: other
+    description: >-
+      The UCP MCP endpoint (POST /api/ucp/mcp) requires a Universal Commerce
+      Protocol agent profile; without one it returns JSON-RPC -32001
+      invalid_profile_url. Discovery at https://wrogn.com/.well-known/ucp.
+notes:
+  - Customer login at https://wrogn.com/account/login (Shopify Customer Accounts).
+  - No API-key or developer-token scheme is published by the brand.

@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: searched
+source: https://wrogn.com/.well-known/openid-configuration
+description: >-
+  OAuth scopes published in the store's own OIDC discovery document
+  (Shopify Customer Accounts, issuer
+  https://shopify.com/authentication/81803051309, served from
+  https://wrogn.com/.well-known/openid-configuration and mirrored at
+  /.well-known/oauth-authorization-server). scopes_supported captured
+  verbatim; no additional scope reference is published by the brand itself.
+provider: uspl-wrogn
+issuer: https://shopify.com/authentication/81803051309
+authorization_endpoint: https://shopify.com/authentication/81803051309/oauth/authorize
+token_endpoint: https://shopify.com/authentication/81803051309/oauth/token
+grant_types:
+  - authorization_code
+  - refresh_token
+  - urn:ietf:params:oauth:grant-type:jwt-bearer
+pkce: S256
+scopes:
+  - scope: openid
+    description: OpenID Connect authentication (standard OIDC scope).
+  - scope: email
+    description: Access to the customer's email address claim (standard OIDC scope).
+  - scope: customer-account-api:full
+    description: >-
+      Full access to the Shopify Customer Account API for the authenticated
+      customer (orders, profile, addresses) on this store.
+  - scope: customer-account-mcp-api:full
+    description: >-
+      Full access to the customer-scoped MCP API surface, enabling
+      authenticated agent operations against the storefront MCP server on
+      behalf of the customer.

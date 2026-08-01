@@ -1,0 +1,52 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://wrogn.com/api/mcp
+description: >-
+  Wrogn (USPL / Universal Sportsbiz) runs its store on Shopify, which exposes
+  the storefront's native MCP server publicly. POST https://wrogn.com/api/mcp
+  answered MCP tools/list unauthenticated at probe time with the five
+  storefront commerce tools below (captured verbatim from the live JSON-RPC
+  response, 2026-07-21). A second, UCP-scoped MCP endpoint at
+  https://wrogn.com/api/ucp/mcp (canonical host
+  https://wrogn-website.myshopify.com/api/ucp/mcp, advertised in
+  /.well-known/ucp and /llms.txt) is also live but requires a UCP agent
+  profile — probing tools/list without one returns JSON-RPC error -32001
+  "UCP discovery failed / invalid_profile_url". Checkout requires human buyer
+  approval per the store's published agent instructions (/agents.md). The MCP
+  endpoint is rate-limited per IP (back off on 429).
+server:
+  name: wrogn-storefront
+  transport: http
+  url: https://wrogn.com/api/mcp
+  auth: none (catalog browsing); Shopify Customer Accounts OIDC for
+    customer-scoped operations (scope customer-account-mcp-api:full in
+    well-known/uspl-wrogn-openid-configuration.json)
+ucp_server:
+  name: wrogn-ucp-shopping
+  transport: http
+  url: https://wrogn.com/api/ucp/mcp
+  discovery: https://wrogn.com/.well-known/ucp
+  requires: UCP agent profile (ucp.dev)
+  schema: https://ucp.dev/2026-04-08/services/shopping/mcp.openrpc.json
+tools:
+  - name: search_catalog
+    description: >-
+      Search for products from the online store, hosted on Shopify. Natural
+      language queries and/or filter criteria; paginated; response conforms to
+      the UCP catalog search capability (dev.ucp.shopping.catalog.search).
+  - name: get_cart
+    description: >-
+      Get the cart including items, shipping options, discount info, and
+      checkout url for a given cart id.
+  - name: update_cart
+    description: >-
+      Perform updates to a cart, including adding/removing/updating line
+      items, buyer information, shipping details, and discount codes.
+  - name: search_shop_policies_and_faqs
+    description: >-
+      Used to get facts about the store's policies, products, or services.
+  - name: get_product_details
+    description: >-
+      Look up a product by ID; pass the options parameter to select a
+      specific variant for the product card.

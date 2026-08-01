@@ -1,0 +1,18 @@
+generated: '2026-07-21'
+method: searched
+source: https://wrogn.com/llms.txt
+description: >-
+  Rate limiting signal published in the store's own agent instructions
+  (/llms.txt and /agents.md): the storefront MCP endpoint is rate-limited
+  per IP and agents are told to back off on 429 responses. No numeric
+  limits are published by the brand; Shopify does not disclose per-store
+  storefront limits, so no limit_count is recorded (nothing is fabricated).
+rate_limits:
+  - name: storefront-mcp
+    scope: per-IP
+    endpoints:
+      - https://wrogn.com/api/mcp
+      - https://wrogn.com/api/ucp/mcp
+    signal: HTTP 429 Too Many Requests
+    guidance: Back off on 429 responses (published in /agents.md).
+    limit_count: null

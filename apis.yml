@@ -1,20 +1,54 @@
 aid: uspl-wrogn
 name: USPL Wrogn
-description: 'USPL Wrogn is a company surfaced as a portfolio company of accel and added to the API Evangelist
-  network as a stub for enrichment. Sector: consumer. This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  USPL (Universal Sportsbiz Pvt. Ltd.) is an Accel-backed Indian
+  celebrity-fashion company whose flagship brand Wrogn — founded in 2014 by
+  Anjana and Vikram Reddy and co-created with cricketer Virat Kohli — sells
+  men's casual wear, footwear, and accessories at wrogn.com
+  (usplworld.com redirects there). The store runs on Shopify and exposes a
+  genuinely agent-ready commerce surface: a public storefront MCP server at
+  /api/mcp, a Universal Commerce Protocol merchant profile at
+  /.well-known/ucp with a UCP MCP endpoint, published agent instructions at
+  /agents.md and /llms.txt, Shopify Customer Accounts OIDC discovery on its
+  own host, and unauthenticated product JSON endpoints.
 url: https://raw.githubusercontent.com/api-evangelist/uspl-wrogn/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://wrogn.com/cdn/shop/files/WROGN-LOGO-1.jpg?v=1704889508
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - accel
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 13
+  pass: local-v1
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Consumer
+- Fashion
+- Apparel
+- eCommerce
+- Retail
+- India
+- Agentic Commerce
+- MCP
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -22,5 +56,33 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/uspl-wrogn-domain-security.yml
 - type: Website
-  url: https://www.usplworld.com/
+  url: https://wrogn.com/
+- type: MCPServer
+  url: mcp/uspl-wrogn-mcp.yml
+- type: WellKnown
+  url: well-known/uspl-wrogn-well-known.yml
+- type: LLMsTxt
+  url: llms/uspl-wrogn-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Authentication
+  url: authentication/uspl-wrogn-authentication.yml
+- type: OAuthScopes
+  url: scopes/uspl-wrogn-scopes.yml
+- type: Conformance
+  url: conformance/uspl-wrogn-conformance.yml
+- type: RateLimits
+  url: rate-limits/uspl-wrogn-rate-limits.yml
+- type: Blog
+  url: https://wrogn.com/blogs/news
+- type: Support
+  url: https://wrogn.com/pages/contact-us
+- type: TermsOfService
+  url: https://wrogn.com/policies/terms-of-service
+- type: PrivacyPolicy
+  url: https://wrogn.com/policies/privacy-policy
+- type: Login
+  url: https://wrogn.com/account/login

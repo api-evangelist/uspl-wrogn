@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: searched
+source: https://wrogn.com/.well-known/ucp
+description: >-
+  Standards conformance observed on the live Wrogn (USPL) Shopify storefront,
+  wrogn.com. Every claim below is backed by a live discovery document or
+  probed endpoint captured in this repo on 2026-07-21; no certifications or
+  compliance programs are published by the brand itself.
+standards:
+  - id: oidc
+    conforms: true
+    evidence: >-
+      https://wrogn.com/.well-known/openid-configuration returns a live OIDC
+      discovery document (Shopify Customer Accounts, issuer
+      https://shopify.com/authentication/81803051309); saved verbatim at
+      well-known/uspl-wrogn-openid-configuration.json.
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      https://wrogn.com/.well-known/oauth-authorization-server (RFC 8414)
+      returns live authorization-server metadata with authorization_code +
+      refresh_token + jwt-bearer grants and PKCE S256; saved verbatim at
+      well-known/uspl-wrogn-oauth-authorization-server.json.
+  - id: mcp
+    conforms: true
+    evidence: >-
+      POST https://wrogn.com/api/mcp answered MCP tools/list over JSON-RPC
+      2.0 with five storefront tools (mcp/uspl-wrogn-mcp.yml).
+  - id: ucp
+    conforms: true
+    evidence: >-
+      https://wrogn.com/.well-known/ucp publishes a Universal Commerce
+      Protocol merchant profile (versions 2026-04-08 and 2026-01-23) with
+      dev.ucp.shopping services and checkout/fulfillment/discount/cart/order/
+      catalog capabilities; saved verbatim at well-known/uspl-wrogn-ucp.json.
+  - id: llms-txt
+    conforms: true
+    evidence: >-
+      https://wrogn.com/llms.txt (mirroring /agents.md) publishes agent
+      instructions; saved verbatim at llms/uspl-wrogn-llms.txt.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: https://wrogn.com/.well-known/security.txt returned 404 at probe time.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      The storefront MCP search_catalog tool documents cursor-based
+      pagination (pagination.cursor + limit, default 10, max 250) in its
+      published inputSchema.

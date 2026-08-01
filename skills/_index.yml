@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+source: https://wrogn.com/agents.md
+description: >-
+  Provider-published agent instructions for the Wrogn storefront, saved
+  verbatim per the pipeline rule that provider-published skills/AGENTS.md
+  take precedence over generated skills. The store publishes /agents.md as
+  the canonical agent-facing description (mirrored at /llms.txt): it
+  documents the UCP discovery + MCP endpoints, the search -> cart ->
+  checkout -> fulfill -> complete agent flow, the buyer-approval rule for
+  checkout, per-IP rate limiting, and the unauthenticated read-only
+  product JSON surface. It also recommends the cross-store Shopify Shop
+  skill (https://shop.app/SKILL.md) for transacting agents. No OpenAPI is
+  published, so no additional skills were generated (nothing to ground
+  operationIds in).
+skills:
+  - file: uspl-wrogn-agents.md
+    name: wrogn-storefront-agent-instructions
+    method: searched
+    source: https://wrogn.com/agents.md
+    api: Wrogn Shopify storefront (MCP + UCP + product JSON)
+    operations:
+      - search_catalog
+      - get_cart
+      - update_cart
+      - search_shop_policies_and_faqs
+      - get_product_details
